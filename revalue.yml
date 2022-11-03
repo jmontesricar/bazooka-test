@@ -1,0 +1,26 @@
+config:
+  target: "https://investment-profit-and-loss.melioffice.com/investment-fci-gains/v1/sites/mla"
+  phases:
+    - duration: 10
+      arrivalRate: 1
+      name: Warm up
+    - duration: 20
+      arrivalRate: 2
+      name: Ramp up load
+  processor: "./conversion.js"
+  payload:
+    path: "data.csv"
+    fields:
+      - "id"
+
+scenarios:
+  - name: "revalue user"
+    flow:
+      - post:
+          url: "/revalue"
+          beforeRequest: "convertIDToInt"
+          json:
+            msg:
+              user_id: "{{ id }}"
+              fund_id: "b167813a-3f43-11ed-b878-0242ac120002"
+              operation_date: "2022-11-02"

@@ -1,0 +1,65 @@
+{
+    "config": {
+        "target": "http://prd-worker-test.investment-profit-and-loss-mla.melifrontends.com/investment-fci-gains/v1/sites/mla",
+        "phases": [
+            {
+                "name": "333rps x 7 mins",
+                "duration": 420,
+                "arrivalRate": 333
+            },
+            {
+                "name": "100rps x 7 mins",
+                "duration": 420,
+                "arrivalRate": 1000
+            },
+            {
+                "name": "2000rps x 7 mins",
+                "duration": 420,
+                "arrivalRate": 2000
+            },
+            {
+                "name": "3500rps x 7 mins",
+                "duration": 420,
+                "arrivalRate": 3500
+            },
+            {
+                "name": "5000rps x 7 mins",
+                "duration": 420,
+                "arrivalRate": 5000
+            },
+            {
+                "name": "7500rps x 7 mins",
+                "duration": 420,
+                "arrivalRate": 7500
+            },
+            {
+                "name": "8333rps x 7 mins",
+                "duration": 2400,
+                "arrivalRate": 8333
+            }
+        ],
+        "payload": {
+            "path": "data.csv",
+            "fields": ["id"]
+        }
+    },
+    "scenarios": [
+        {
+            "name": "revalue user",
+            "flow": [
+                {
+                    "post": {
+                        "url": "/revalue",
+                        "json": {
+                            "msg": {
+                                "user_id": "{{ id }}",
+                                "fund_id": "b167813a-3f43-11ed-b878-0242ac120002",
+                                "operation_date": "2022-11-08"
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
